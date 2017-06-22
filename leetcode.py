@@ -146,3 +146,158 @@ print isMatch("aa", "a*") # true
 print isMatch("aa", ".*") # true
 print isMatch("ab", ".*") # true
 print isMatch("aab", "c*a*b") # true
+
+### 3sum
+
+def threeSum(s):
+	res_arr = []
+	for i in range(len(s)):
+		for j in range(len(s)):
+			sub_arr = s[i:j]
+			if len(sub_arr) == 3:
+				if sum(sub_arr) == 0:
+					res_arr.append(sub_arr)
+	return res_arr;
+
+print threeSum([-1,0,1,2,-1,-4])
+
+### three Sum Closest
+
+def threeSumClosest(s, target):
+	res_arr = []
+	for i in range(len(s)):
+		for j in range(len(s)):
+			sub_arr = s[i:j]
+			if len(sub_arr) == 3:
+				if sum(sub_arr) == target or abs(target - sum(sub_arr)) == 1:
+					res_arr.append(sub_arr)
+	return res_arr
+
+print threeSumClosest([-1,2,1,-4], 1)
+
+### Letter Combinations of a Phone Number
+
+def letterCombinations(s):
+	myDict = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+	arr = []
+	res_arr = []
+	for i in range(len(s)):
+		if s[i] in myDict:
+			arr.append(myDict[s[i]])
+	print arr
+	l = 0
+	while l < len(arr[0]):
+		k = 0
+		while k < len(arr[1]):
+			res_arr.append(arr[0][l]+arr[1][k])
+			k += 1
+		l += 1
+	return res_arr;
+
+
+print letterCombinations("23")
+
+### 4sum
+
+def fourSum(s):
+	res_arr = []
+	for i in range(len(s)):
+		for j in range(len(s)):
+			sub_arr = s[i:j]
+			if len(sub_arr) == 4:
+				if sum(sub_arr) == 0:
+					res_arr.append(sub_arr)
+	return res_arr
+
+
+print fourSum([1,0,-1,0,-2,2])
+
+### valid paranthesis
+
+def validParanthesis(s):
+	opn = 0
+	arr= []
+	for i in s:
+		print i
+		if i == '(' or i == '{' or i =='[':
+			opn += 1
+			arr.append(i)
+		elif i == ')':
+			if arr[-1] == '(':
+				arr.pop()
+				opn -= 1
+			else:
+				return False
+		elif i == '}':
+			if arr[-1] == '{':
+				arr.pop()
+				opn -= 1
+			else:
+				return False
+		elif i == ']':
+			if arr[-1] == '[':
+				arr.pop()
+				opn -= 1
+			else:
+				return False
+	if opn == 0:
+		return True
+	else:
+		return False
+
+print validParanthesis('[[]}')
+
+### Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+def generateParanthesis(n):
+	def walk(l, r, s):
+		if l > 0:
+			walk(l-1, r, s + '(')
+		if r > l:
+			walk(l, r-1, s + ')')
+		if not l and not r:
+			print s;
+	walk(n,n,'')
+
+generateParanthesis(3)
+
+### Remove Element in place 
+
+def removeElement(arr, val):
+	arr.sort()
+	while val in arr:
+		arr = arr[:arr.index(val)] + arr[((arr.index(val))+1):]
+	return len(arr), arr
+
+print removeElement([3,2,2,3,3,3,3,2],3)
+
+### Remove Duplicates from Sorted Array in place
+
+def removeDuplicates(arr):
+	i = 0
+	while i in range(len(arr)):
+		if arr[i] in arr[((arr.index(arr[i]))+1):]:
+			arr = arr[:i] + arr[i+1:]
+			i -= 1
+		i += 1
+	return arr
+
+
+print removeDuplicates([1,1,1,1,2,2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
